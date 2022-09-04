@@ -66,12 +66,22 @@
         var map = L.map('map').setView([18.8, 73.9], 10);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
+        // Routing
+        var routing_control = L.Routing.control({
+            waypoints:   [
+                L.latLng(19.1, 73.96),
+                L.latLng(18.73, 74.20)
+            ],
+            routeWhileDragging: true,
+            collapsible: true,
+        }).addTo(map);
 
         // Change Zoom level depending on screen size
         window.addEventListener('load', function(event){
             var width = document.documentElement.clientWidth;
             if (width < 500) {
                 map.setZoom(8);
+                routing_control.hide();
             } 
             if(width > 500 && width<900){
                 map.setZoom(9);
@@ -217,17 +227,6 @@
             // add to map
             L.marker(ganpati.coordinates, {icon: ganpati_icon}).bindPopup(ganpati_info).addTo(map);
         })
-
-        // Routing
-        L.Routing.control({
-            waypoints:   [
-                L.latLng(19.1, 73.96),
-                L.latLng(18.73, 74.20)
-            ],
-            routeWhileDragging: true,
-            collapsible: true,
-        }).addTo(map);
-
     </script>
 </body>
 </html>
